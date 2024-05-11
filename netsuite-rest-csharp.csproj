@@ -4,6 +4,9 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <PackageId>patatoa.netsuite-rest-csharp</PackageId>
+    <Authors>patatoa@gmail.com</Authors>
+    <RepositoryUrl>https://github.com/patatoa/netsuite-rest-csharp</RepositoryUrl>
   </PropertyGroup>
   
   <ItemGroup>
