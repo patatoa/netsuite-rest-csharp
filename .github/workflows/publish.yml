@@ -1,0 +1,33 @@
+name: Publish to NuGet
+
+on:
+	release:
+		types: [published]
+
+jobs:
+	build:
+		runs-on: ubuntu-latest
+
+		steps:
+		- name: Checkout code
+			uses: actions/checkout@v2
+
+		- name: Setup .NET
+			uses: actions/setup-dotnet@v1
+			with:
+				dotnet-version: 6.0.x
+
+		- name: Restore dependencies
+			run: dotnet restore netsuite-rest-csharp.csproj
+
+		- name: Build
+			run: dotnet build --no-restore netsuite-rest-csharp.csproj
+
+		- name: Pack
+			run: dotnet pack --no-build --output . netsuite-rest-csharp.csproj
+
+		- name: Push to NuGet
+			uses: rohith/publish-nuget@v2
+			with:
+				PROJECT_FILE_PATH: netsuite-rest-csharp.csproj
+				NUGET_KEY: ${{secrets.NUGET_API_KEY}}
