@@ -34,8 +34,6 @@ namespace NetsuiteRequest
 			using HttpClient client = new();
 			var oAuth1HeaderGenerator = new OAuth1HeaderGenerator(_consumerKey, _consumerSecret, _token, _tokenSecret, _realm, httpMethod, url);
 			var header = oAuth1HeaderGenerator.CreateAuthenticationHeaderValue();
-			Console.WriteLine(header);
-			Console.WriteLine(url);
 			client.DefaultRequestHeaders.Authorization = header;
 			client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -94,8 +92,6 @@ namespace NetsuiteRequest
 			using HttpClient client = new();
 			var oAuth1HeaderGenerator = new OAuth1HeaderGenerator(_consumerKey, _consumerSecret, _token, _tokenSecret, _realm, HttpMethod.Post, url);
 			var header = oAuth1HeaderGenerator.CreateAuthenticationHeaderValue();
-			Console.WriteLine(header);
-			Console.WriteLine(url);
 			client.DefaultRequestHeaders.Authorization = header;
 			client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 			client.DefaultRequestHeaders.Add("Prefer", "transient");

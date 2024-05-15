@@ -9,8 +9,4 @@
     <RepositoryUrl>https://github.com/patatoa/netsuite-rest-csharp</RepositoryUrl>
   </PropertyGroup>
   
-  <ItemGroup>
-    <Compile Remove="./NetsuiteRequestTests.cs" />
-  </ItemGroup>
-
 </Project>

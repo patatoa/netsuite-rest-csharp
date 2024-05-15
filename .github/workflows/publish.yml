@@ -23,7 +23,7 @@ jobs:
         dotnet-version: 8.0.x
 
     - name: Restore dependencies
-      run: dotnet restore netsuite-rest-csharp.csproj
+      run: dotnet restore NetsuiteRequest/netsuite-rest-csharp.csproj
 
     - name: Test
       env:
@@ -32,13 +32,13 @@ jobs:
         TOKEN: ${{secrets.TOKEN}}
         TOKEN_SECRET: ${{secrets.TOKEN_SECRET}}
         REALM: ${{secrets.REALM}}
-      run: dotnet test NetsuiteRequestTest.csproj
+      run: dotnet test NetsuiteRequest.Tests/NetsuiteRequest.Test.csproj
 
     - name: Build
-      run: dotnet build --no-restore --configuration Release /p:Version=${VERSION} netsuite-rest-csharp.csproj
+      run: dotnet build --no-restore --configuration Release /p:Version=${VERSION} NetsuiteRequest/netsuite-rest-csharp.csproj
       
     - name: Pack
-      run: dotnet pack --no-build --output . netsuite-rest-csharp.csproj
+      run: dotnet pack --no-build --output . NetsuiteRequest/netsuite-rest-csharp.csproj
   
     - name: Push to NuGet
       run: dotnet nuget push *.nupkg --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json

@@ -1,0 +1,30 @@
+name: Continuous Integration
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: build
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Test
+      env:
+        CONSUMER_KEY: ${{secrets.CONSUMER_KEY}}
+        CONSUMER_SECRET: ${{secrets.CONSUMER_SECRET}}
+        TOKEN: ${{secrets.TOKEN}}
+        TOKEN_SECRET: ${{secrets.TOKEN_SECRET}}
+        REALM: ${{secrets.REALM}}
+        TEST_ID: ${{secrets.TEST_ID}}
+        TEST_EMAIL: ${{secrets.TEST_EMAIL}}
+      run: dotnet test NetsuiteRequest.Tests/NetsuiteRequest.Test.csproj
