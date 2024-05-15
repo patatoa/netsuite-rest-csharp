@@ -26,7 +26,15 @@ HttpMethod httpMethod = HttpMethod.Get;
 JsonDocument result = await netsuiteRequest.Request(urlString, httpMethod);
 ```
 
-The hope by returning a `JsonDocument` is that it provides a flexible format that the caller can then box however they need.
+### SuiteQL Example
+
+```cs
+JsonObject body = new();
+body.Add("q", $"SELECT * FROM customer where email = '{testEmail}'");
+var result = await netsuiteRequest.SuiteQlRequest(body, 1);
+```
+
+The hope is by returning a `JsonDocument` it provides a flexible format that the caller can then box however they need.
 
 ## History
 
