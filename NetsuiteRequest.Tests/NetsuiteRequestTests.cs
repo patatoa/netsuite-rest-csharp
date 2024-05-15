@@ -1,15 +1,13 @@
-// using xunit;
 using System;
 using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using NetsuiteRequest;
 
-namespace NetsuiteRequest.Tests
-{
+namespace NetsuiteRequest.Test;
 	public class NetsuiteRequestTests
 	{
-		[Xunit.Fact]
+		[Fact]
 		public async Task RequestTest()
 		{
 			// Arrange
@@ -24,7 +22,7 @@ namespace NetsuiteRequest.Tests
 			// Assert
 			Assert.NotNull(result);
 		}
-		[Xunit.Fact]
+		[Fact]
 		public async Task SuiteQlRequestTest()
 		{
 			// Arrange
@@ -52,4 +50,3 @@ namespace NetsuiteRequest.Tests
 
 		}
 	}
-}
