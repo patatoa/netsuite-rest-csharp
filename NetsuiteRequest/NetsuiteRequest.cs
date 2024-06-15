@@ -57,6 +57,13 @@ namespace NetsuiteRequest
 					}
 					response = await client.PutAsync(url, new StringContent(body.ToString(), Encoding.UTF8, "application/json"));
 					break;
+				case "PATCH":
+					if (body == null)
+					{
+						throw new Exception("Error: Body is required for PATCH requests");
+					}
+					response = await client.PatchAsync(url, new StringContent(body.ToString(), Encoding.UTF8, "application/json"));
+					break;
 				case "DELETE":
 					response = await client.DeleteAsync(url);
 					break;
@@ -67,7 +74,7 @@ namespace NetsuiteRequest
 			if (response.IsSuccessStatusCode)
 			{
 				var jsonString = await response.Content.ReadAsStringAsync();
-				return JsonDocument.Parse(jsonString);
+				return jsonString == "" ? JsonDocument.Parse("{}") : JsonDocument.Parse(jsonString);
 			}
 			else
 			{

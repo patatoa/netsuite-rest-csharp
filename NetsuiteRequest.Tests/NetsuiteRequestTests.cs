@@ -4,7 +4,8 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using NetsuiteRequest;
 
-namespace NetsuiteRequest.Test;
+namespace NetsuiteRequest.Tests
+{
 	public class NetsuiteRequestTests
 	{
 		[Fact]
@@ -18,6 +19,23 @@ namespace NetsuiteRequest.Test;
 
 			// Act
 			var result = await netsuiteRequest.Request(urlString, httpMethod);
+
+			// Assert
+			Assert.NotNull(result);
+		}
+		[Fact]
+		public async Task PatchTest()
+		{
+			// Arrange
+			var netsuiteRequest = GenerateNetsuiteRequest();
+			string testId = Environment.GetEnvironmentVariable("TEST_ID") ?? throw new ArgumentNullException("TEST_ID");
+			string urlString = $"/customer/{testId}";
+			HttpMethod httpMethod = HttpMethod.Patch;
+			JsonObject body = new();
+			body.Add("firstName", "Test");
+
+			// Act
+			var result = await netsuiteRequest.Request(urlString, httpMethod, body);
 
 			// Assert
 			Assert.NotNull(result);
@@ -50,3 +68,4 @@ namespace NetsuiteRequest.Test;
 
 		}
 	}
+}
